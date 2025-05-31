@@ -1,4 +1,4 @@
-# Dogs API 🐶
+# Dogs API 
 Simple CRUD API for Dog Objects with JPA (Hibernate)
 
 ## Version
@@ -9,7 +9,7 @@ Simple CRUD API for Dog Objects with JPA (Hibernate)
 ### Get the Project
 **Clone:**
 bash
-git clone https://github.com/your-github-username/dogs-api.git
+git clone https://github.com/rwgrooms/dogs-api.git
 
 **OR** download the zip and open the project in **VS Code**.
 
@@ -96,4 +96,4 @@ json
 
 ## Author
 Robert Grooms – UNCG CSC 340  
-GitHub: [https://github.com/your-github-username](https://github.com/your-github-username)
+GitHub: [https://github.com/rwgrooms]
