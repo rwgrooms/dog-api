@@ -66,7 +66,7 @@ DogController exposes the REST API endpoints.
 | GET    | /api/dogs                      | Get all dogs                            |
 | GET    | /api/dogs/{id}                 | Get a dog by ID                         |
 | GET    | /api/dogs/breed/{breed}        | Get dogs by breed                       |
-| GET    | /api/dogs/search?name=substring| Search dogs by name (case-insensitive)  |
+| GET    | /api/dogs/search/{name}        | Search dogs by name (case-insensitive)  |
 | POST   | /api/dogs                      | Create a new dog                        |
 | PUT    | /api/dogs/{id}                 | Update a dog                            |
 | DELETE | /api/dogs/{id}                 | Delete a dog                            |
