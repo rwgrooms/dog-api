@@ -1,0 +1,95 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+nav {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  gap: 1em;
+  display: flex;
+}
+
+nav a {
+  color: white;
+  background-color: #007bff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-right: 1em;
+  text-decoration: none;
+  color: white;
+}
+
+nav a:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  max-width: 900px;
+  margin: 2em auto;
+}
+
+.card {
+  background: white;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card img {
+  max-width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.detail-img {
+  max-width: 400px;
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+header {
+ background-color: #333;
+ padding: 2em;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.centered {
+  text-align: center;
+  margin-top: 2em;
+}
+
+p {
+    text-align: center;
+}
