@@ -18,7 +18,7 @@
     <div class="card">
       <img src="/images/dog1.jpg">
       <div>${dog.name}</div>
-      <a href="details.html?dog=baxter" class="button">View Details</a>
+      <a href="/api/dogs/${dog.dogId}" class="button">View Details</a>
     </div>
    </#list>
   </div>

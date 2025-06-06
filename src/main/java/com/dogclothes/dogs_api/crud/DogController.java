@@ -35,7 +35,8 @@ public class DogController {
 
     @GetMapping("/{id}")
     public Object getDogById(@PathVariable Long id, Model model) {
-        model.addAttribute("dogsL" , dogService.getDogById(id));
+        Dog dog = dogService.getDogById(id).orElse(null);
+        model.addAttribute("dog" , dog);
         model.addAttribute("title", "Dog #: " + id);
         return "animal-details";
         //return dogService.getDogById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
