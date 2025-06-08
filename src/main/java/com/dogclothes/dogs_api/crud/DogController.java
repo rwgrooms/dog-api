@@ -155,6 +155,10 @@ public class DogController {
 
             model.addAttribute("dogsList", dogService.getAllDogs());
             model.addAttribute("title", "All Dogs");
+            //The directory used for saving the file does not copy to the target directory immediately so added a delay to avoid an empty picture on redirect.
+            //I only kept using that directory since I could not check in a system directory to git (ie: c:\\myimages)  
+            Thread.sleep(3000); 
+            
             return "animal-list";
 
         } catch (Exception e) {

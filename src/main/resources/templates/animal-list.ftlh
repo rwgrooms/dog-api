@@ -17,7 +17,7 @@
   <div class="gallery">
    <#list dogsList as dog>
     <div class="card">
-      <img src="${dog.imgPath}">
+      <img src="${dog.imgPath}?t=${.now?long?c}">
       <div>${dog.name}</div>
       <a href="/api/dogs/${dog.dogId}" class="button">View Details</a>
     </div>
