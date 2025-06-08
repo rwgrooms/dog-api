@@ -36,6 +36,7 @@ public class Dog {
         this.breed = breed;
         this.age = age;
         this.activeDate = activeDate;
+        this.imgPath = imgPath;
     }
 
     // Getters and Setters
@@ -94,4 +95,17 @@ public class Dog {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", breed='" + breed + '\'' +
+                ", age=" + age +
+                ", activeDate=" + activeDate +
+                ", imgPath='" + imgPath + '\'' +
+                '}';
+    }
+
 }

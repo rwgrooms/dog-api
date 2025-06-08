@@ -36,7 +36,8 @@
   <header>
         <nav>
             <a href="/api/dogs">Home</a>
-            <a href="about.html">About</a>
+            <a href="/api/dogs/create-form">Create</a>
+            <a href="/about.html">About</a>
         </nav>
     </header>
 </head>
