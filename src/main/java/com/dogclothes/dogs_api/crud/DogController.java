@@ -9,13 +9,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -33,14 +26,13 @@ public class DogController {
         //return dogService.getAllDogs();
     }
 
-    @GetMapping("/{id}")
-    public Object getDogById(@PathVariable Long id, Model model) {
-        Dog dog = dogService.getDogById(id).orElse(null);
-        model.addAttribute("dog" , dog);
-        model.addAttribute("title", "Dog #: " + id);
-        return "animal-details";
-        //return dogService.getDogById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
+   @GetMapping("/{id}")
+   public Object getDogById(@PathVariable Long id, Model model) {
+       Dog dog = dogService.getDogById(id).orElse(null);
+       model.addAttribute("dog" , dog);
+       model.addAttribute("title", "Dog #: " + id);
+       return "animal-details";
+   }
 
     @GetMapping("/breed/{breed}")
     public List<Dog> getDogsByBreed(@PathVariable String breed) {
@@ -53,9 +45,25 @@ public class DogController {
     }  
 
     @PostMapping
-    public Dog createDog(@RequestBody Dog dog) {
-        return dogService.createDog(dog);
+    public String createDog(@RequestBody Dog dog, Model model) {
+        model.addAttribute("dogsList" , dogService.createDog(dog));
+        model.addAttribute("title", "All Dogs");
+
+        return "animal-list";
+        //return dogService.createDog(dog);
     }
+
+    @GetMapping("/create-form")
+    public String showCreateDogForm(Model model) {
+        System.out.println(">> Reached GET /create-form");
+        //model.addAttribute("dog", new Dog());
+        //return "animal-create";
+
+        model.addAttribute("dog" , new Dog());
+        model.addAttribute("title", "Add a Dog");
+        return "animal-create";
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog dog) {

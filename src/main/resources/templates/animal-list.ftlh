@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="/css/styles.css">
   <header>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="/api/dogs">Home</a>
             <a href="about.html">About</a>
         </nav>
     </header>

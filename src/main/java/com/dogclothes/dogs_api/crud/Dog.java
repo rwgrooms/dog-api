@@ -23,11 +23,14 @@ public class Dog {
     @Temporal(TemporalType.DATE)
     private Date activeDate;
 
+    @Column(nullable = false)
+    private String imgPath;
+
     // Constructors
     public Dog() {
     }
 
-    public Dog(String name, String description, String breed, double age, Date activeDate) {
+    public Dog(String name, String description, String breed, double age, Date activeDate, String imgPath) {
         this.name = name;
         this.description = description;
         this.breed = breed;
@@ -82,5 +85,13 @@ public class Dog {
 
     public void setActiveDate(Date activeDate) {
         this.activeDate = activeDate;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

@@ -39,6 +39,7 @@ public class DogService {
             dog.setBreed(updatedDog.getBreed());
             dog.setAge(updatedDog.getAge());
             dog.setActiveDate((updatedDog.getActiveDate()));
+            dog.setImgPath(updatedDog.getImgPath());
             return dogRepository.save(dog);
         });
     }
