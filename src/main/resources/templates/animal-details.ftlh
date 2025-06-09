@@ -16,6 +16,7 @@
     <img id="dog-image" class="detail-img" src="${dog.imgPath}">
     <p id="dog-desc">${dog.description}</p>
     <a href="/api/dogs/edit/${dog.dogId}" class="button">Edit Details</a>
+    <a href="/api/dogs/delete/${dog.dogId}" class="button">Delete Details</a>
   </div>
 </body>
 </html>

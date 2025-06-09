@@ -43,14 +43,26 @@ public class DogController {
        return "animal-details";
    }
 
-    @GetMapping("/breed/{breed}")
-    public List<Dog> getDogsByBreed(@PathVariable String breed) {
-        return dogService.getDogsByBreed(breed);
-    }
+    // @GetMapping("/breed/{breed}")
+    // public List<Dog> getDogsByBreed(@PathVariable String breed) {
+    //     return dogService.getDogsByBreed(breed);
+    // }
 
-    @GetMapping("/search/{name}")
-    public List<Dog> getDogsByNameContains(@PathVariable String name) {
-        return dogService.getDogsByNameContains(name);
+    @GetMapping("/search")
+    public String getDogsByNameContains(@RequestParam(required=false) String name, Model model) {
+
+        List<Dog> dogs;
+        if (name != null && !name.isBlank()) {
+            dogs = dogService.getDogsByNameContains(name);
+        } else {
+            dogs = dogService.getAllDogs();
+        }
+
+        model.addAttribute("dogsList", dogs);
+        model.addAttribute("name", name);
+        model.addAttribute("title", "Dogs named " + name);
+        return "animal-list";
+
     }  
 
     @PostMapping
@@ -77,6 +89,10 @@ public class DogController {
             dogService.createDog(dog);
             model.addAttribute("dogsList", dogService.getAllDogs());
             model.addAttribute("title", "All Dogs");
+            //The directory used for saving the file does not copy to the target directory immediately so added a delay to avoid an empty picture on redirect.
+            //I only kept using that directory since I could not check in a system directory to git (ie: c:\\myimages)  
+            Thread.sleep(3000); 
+
             } catch (Exception e) {
                 e.printStackTrace();
         }
@@ -123,9 +139,19 @@ public class DogController {
                 return "redirect:/api/dogs"; // Or handle 404 properly
             }
 
-            // Handle image: use new one if uploaded, else keep existing
+            // Handle image - use new one if uploaded, else keep existing
             String imgPath = existingImagePath;
             if (image != null && !image.isEmpty()) {
+
+                //Start - Image has changed so delete the previous image file
+                String uploadDir1 = new File("src/main/resources/public/").getAbsolutePath();
+                try {
+                    Files.delete(Paths.get(uploadDir1, existingDog.getImgPath()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //End - Image has changed so delete the previous image file
+
                 String originalFilename = image.getOriginalFilename();
                 String extension = "";
                 if (originalFilename != null && originalFilename.contains(".")) {
@@ -137,7 +163,6 @@ public class DogController {
                 imgPath = "/images/" + hashedFilename;
             }
 
-            // Update fields
             existingDog.setName(name);
             existingDog.setDescription(description);
             existingDog.setBreed(breed);
@@ -168,17 +193,26 @@ public class DogController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog dog) {
-        return dogService.updateDog(id, dog)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog dog) {
+    //     return dogService.updateDog(id, dog)
+    //             .map(ResponseEntity::ok)
+    //             .orElse(ResponseEntity.notFound().build());
+    // }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDog(@PathVariable Long id) {
-        return dogService.deleteDog(id)
-                ? ResponseEntity.noContent().build()
-                : ResponseEntity.notFound().build();
-}
+    @GetMapping("/delete/{id}")
+    public Object deleteDog(@PathVariable Long id, Model model) {
+        Dog dog = dogService.getDogById(id).orElse(null);
+        String uploadDir = new File("src/main/resources/public/").getAbsolutePath();
+        try {
+            Files.delete(Paths.get(uploadDir, dog.getImgPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dogService.deleteDog(id);
+        model.addAttribute("dogsList", dogService.getAllDogs());
+        model.addAttribute("title", "All Dogs");
+        return "animal-list";
+    }
 }
