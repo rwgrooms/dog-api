@@ -20,9 +20,9 @@ public class DogService {
         return dogRepository.findById(id);
     }
 
-    public List<Dog> getDogsByBreed(String breed) {
-        return dogRepository.findByBreed(breed);
-    }
+    // public List<Dog> getDogsByBreed(String breed) {
+    //     return dogRepository.findByBreed(breed);
+    // }
 
     public List<Dog> getDogsByNameContains(String name) {
         return dogRepository.findByNameContainingIgnoreCase(name);

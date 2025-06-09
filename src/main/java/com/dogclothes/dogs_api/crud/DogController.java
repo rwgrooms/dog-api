@@ -43,14 +43,26 @@ public class DogController {
        return "animal-details";
    }
 
-    @GetMapping("/breed/{breed}")
-    public List<Dog> getDogsByBreed(@PathVariable String breed) {
-        return dogService.getDogsByBreed(breed);
-    }
+    // @GetMapping("/breed/{breed}")
+    // public List<Dog> getDogsByBreed(@PathVariable String breed) {
+    //     return dogService.getDogsByBreed(breed);
+    // }
 
-    @GetMapping("/search/{name}")
-    public List<Dog> getDogsByNameContains(@PathVariable String name) {
-        return dogService.getDogsByNameContains(name);
+    @GetMapping("/search")
+    public String getDogsByNameContains(@RequestParam(required=false) String name, Model model) {
+
+        List<Dog> dogs;
+        if (name != null && !name.isBlank()) {
+            dogs = dogService.getDogsByNameContains(name);
+        } else {
+            dogs = dogService.getAllDogs();
+        }
+
+        model.addAttribute("dogsList", dogs);
+        model.addAttribute("name", name);
+        model.addAttribute("title", "Dogs named " + name);
+        return "animal-list";
+
     }  
 
     @PostMapping
@@ -181,12 +193,12 @@ public class DogController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog dog) {
-        return dogService.updateDog(id, dog)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Dog> updateDog(@PathVariable Long id, @RequestBody Dog dog) {
+    //     return dogService.updateDog(id, dog)
+    //             .map(ResponseEntity::ok)
+    //             .orElse(ResponseEntity.notFound().build());
+    // }
 
     @GetMapping("/delete/{id}")
     public Object deleteDog(@PathVariable Long id, Model model) {
